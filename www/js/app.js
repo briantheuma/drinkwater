@@ -128,7 +128,5 @@ app.controller('createCtrl', function($localstorage,$scope) {
         }
         $scope.saveItem(item, $scope.Person[item]);
     };
-
-
 });
 
