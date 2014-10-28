@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html ng-app='ionicApp'>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://include.jaydata.org/jaydata.js"></script>
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+</head>
+<body>
+<ion-nav-bar class='bar-blue-a'>
+    <ion-nav-back-button class="button-clear"></ion-nav-back-button>
+    <ion-nav-buttons ng-controller="createCtrl" side="right">
+        <button class="button-clear" ng-click="">
+            <i class="fa fa-cog"></i>
+        </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+<ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+<script type="text/ng-template" id="splash.html">
+    <ion-view title="Splash" hide-nav-bar="true">
+        <ion-content scroll="false" class="padding splash">
+            <h1 class="splash-h1">DrinkWater v0.1.1</h1>
+            <button ui-sref='Main' class="button button-block button-energized">Get Started <i class="fa fa-chevron-right"></i></button>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script type="text/ng-template" id="main.html">
+    <ion-view title="DrinkWater">
+        <ion-content scroll="false">
+            <div class="section-select bg-b" ss-icon="male" ui-sref='Body'></div>
+            <div class="section-select bg-c" ss-icon="tint" ui-sref='Hydration'></div>
+            <div class="section-select bg-d" ss-icon="bicycle" ui-sref='Activity'></div>
+            <div class="section-select bg-e" ss-icon="sun-o" ui-sref='Climate'></div>
+            <div class="section-select bg-f" ss-icon="dashboard" ui-sref='Results'></div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script type="text/ng-template" id="body.html">
+    <ion-view title="Body">
+        <ion-content scroll="false" class="bg-b">
+            <div class="section-data">
+
+                <div class="sd-data">
+                    <div class="sdd-title">Gender</div>
+                    <div class="sdd-data">{{Person.Gender}}</div>
+                </div>
+
+                <div class="sd-control">
+                    <div class="gender-radios">
+                        <ion-radio ng-model="Person.Gender" ng-click="saveItem(Gender, Person.Gender)" ng-value="'Male'" class="genderselect"><i class="fa fa-male"></i></ion-radio>
+                        <ion-radio ng-model="Person.Gender" ng-click="saveItem(Gender, Person.Gender)" ng-value="'Female'" class="genderselect"><i class="fa fa-female"></i></ion-radio>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-data">
+                <div class="sd-data">
+                    <div class="sdd-title">Age</div>
+                    <div class="sdd-data">{{Person.Age | number:0}}<span>years</span></div>
+                </div>
+                <div class="sd-control">
+                    <div class="notch-minus" ng-click="notchDown('Age',16)"><i class="fa fa-minus"></i></div>
+                    <div class="slider-holder">
+                        <slider floor="16" ceiling="70" step="1" precision="1" decimals="0" ng-model="Person.Age" ng-click="saveItem(Age, Person.Age)"></slider>
+                    </div>
+                    <div class="notch-plus" ng-click="notchUp('Age',70)"><i class="fa fa-plus"></i></div>
+                </div>
+            </div>
+
+            <div class="section-data">
+                <div class="sd-data">
+                    <div class="sdd-title">Height</div>
+                    <div class="sdd-data">{{Person.Height | number:0}}<span>cm</span></div>
+                </div>
+                <div class="sd-control">
+                    <div class="notch-minus" ng-click="notchDown('Height',120)"><i class="fa fa-minus"></i></div>
+                    <div class="slider-holder">
+                        <slider floor="120" ceiling="220" step="1" precision="1" decimals="0" ng-model="Person.Height" ng-click="saveItem(Height, Person.Height)"></slider>
+                    </div>
+                    <div class="notch-plus" ng-click="notchUp('Height',220)"><i class="fa fa-plus"></i></div>
+                </div>
+            </div>
+
+            <div class="section-data">
+                <div class="sd-data">
+                    <div class="sdd-title">Weight</div>
+                    <div class="sdd-data">{{Person.Weight | number:0}}<span>kg</span></div>
+                </div>
+                <div class="sd-control">
+                    <div class="notch-minus" ng-click="notchDown('Weight', 40)"><i class="fa fa-minus"></i></div>
+                    <div class="slider-holder">
+                        <slider floor="40" ceiling="150" step="1" precision="1" decimals="0" ng-model="Person.Weight" ng-click="saveItem(Weight, Person.Weight)"></slider>
+                    </div>
+                    <div class="notch-plus" ng-click="notchUp('Weight',150)"><i class="fa fa-plus"></i></div>
+                </div>
+            </div>
+
+            <div class="section-select bg-c" ss-icon="tint" ui-sref='Hydration'></div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script type="text/ng-template" id="hydration.html">
+    <ion-view title="Hydration">
+        <ion-content scroll="false" class="bg-c">
+
+            <div class="section-data">
+                <div class="sd-data">
+                    <div class="sdd-title">How much water do you drink per day?</div>
+                    <div class="sdd-data">{{Person.Intake}}<span>Liters</span></div>
+                </div>
+                <div class="sd-control">
+                    <div class="notch-minus" ng-click="notchDown('Intake', 0, 0.5)"><i class="fa fa-minus"></i></div>
+                    <div class="slider-holder">
+                        <slider floor="0" ceiling="4" step="0.5" precision="1" decimals="0" ng-model="Person.Intake" ng-click="saveItem(Intake, Person.Intake)"></slider>
+                    </div>
+                    <div class="notch-plus" ng-click="notchUp('Intake', 4, 0.5)"><i class="fa fa-plus"></i></div>
+                </div>
+            </div>
+
+            <div class="section-data">
+            </div>
+
+            <div class="section-data">
+            </div>
+
+            <div class="section-data">
+            </div>
+
+            <div class="section-select bg-d" ss-icon="bicycle" ui-sref='Activity'></div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script type="text/ng-template" id="activity.html">
+    <ion-view title="Activity">
+        <ion-content scroll="false" class="bg-d">
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-select bg-e" ss-icon="sun-o" ui-sref='Climate'></div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script type="text/ng-template" id="climate.html">
+    <ion-view title="Climate">
+        <ion-content scroll="false" class="bg-e">
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-select bg-f" ss-icon="dashboard" ui-sref='Results'></div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script type="text/ng-template" id="results.html">
+    <ion-view title="Results">
+        <ion-content scroll="false" class="bg-f">
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+            <div class="section-data"></div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script src="js/directives/directives.js"></script>
+<script src="lib/uislider/slider.js"></script>
+<link href="lib/uislider/slider.css" rel="stylesheet"/>
+<script src="lib/retina-1.3.0/retina.min.js"></script>
+
+<link href="css/styles.css" rel="stylesheet">
+</body>
+</html>
