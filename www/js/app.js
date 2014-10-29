@@ -6,13 +6,9 @@
 var app = angular.module('ionicApp', ['ionic','ui.slider']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/splash/');
+    $urlRouterProvider.otherwise('/main/');
 
     $stateProvider
-        .state('Splash', {
-            url: '/splash/',
-            templateUrl: 'splash.html'
-        })
         .state('Main', {
             url: '/main/',
             controller: 'createCtrl',
